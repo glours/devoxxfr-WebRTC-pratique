@@ -24,3 +24,6 @@ Importer le projet maven dans votre éditeur de code préféré.
 lancer le serveur et assurez vous que votre projet est bien accessible sur `localhost:4242`
 
 `git checkout step0` pour récupérer le code à la fin de cette étape
+
+### STEP 1 - Mode miroir
+ Afficher votre webcam dans la page web.

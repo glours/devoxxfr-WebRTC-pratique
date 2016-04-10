@@ -1,3 +1,4 @@
 function isUserMediaSupported() {
-    //Code here
+    return !!(navigator.getUserMedia || navigator.webkitGetUserMedia ||
+    navigator.mozGetUserMedia || navigator.msGetUserMedia);
 }
