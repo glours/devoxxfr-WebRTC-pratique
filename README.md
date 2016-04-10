@@ -20,7 +20,7 @@ A la fin de cette session vous serez en mesure d'intégrer rapidement audio et v
 `git checkout step-init`
 
 ### STEP 0 - Vérifier la compatibilité de votre navigateur
-Importer le projet maven dans votre éditeur de code préféré.  
+Importer le projet maven dans votre éditeur de code préféré.
 Lancer le serveur et assurez vous que votre projet est bien accessible sur `localhost:4242`
 
 `git checkout step0` pour récupérer le code à la fin de cette étape
@@ -29,3 +29,11 @@ Lancer le serveur et assurez vous que votre projet est bien accessible sur `loca
  Afficher votre webcam dans la page web.
  `git checkout step1` pour récupérer le code à la fin de cette étape
 
+### STEP 2 - Ajouter des contraintes sur la video et selection des sources
+Utiliser MediaTrackConstraints pour définir la taille de la video et le framerate
+Utiliser MediaStreamTrack pour parcourir les différentes caméras et micros de disponibles
+
+Pour faire fonctionner sous chrome la dernière version de l'api :
+`chrome://flags/#enable-experimental-web-platform-features`
+
+`git checkout step2` pour récupérer le code à la fin de cette étape
