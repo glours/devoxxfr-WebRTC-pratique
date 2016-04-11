@@ -12,15 +12,22 @@ function displayWebRTCSupport(checkElementId, contentElementId) {
     }
 }
 
-function displayMirrorVideo(checkElementId, videoElementId) {
+function displayMirrorVideo(checkElementId, videoElementId, videoSource, audioSource) {
+    var mirror = $("#" + videoElementId);
     if($('#' + checkElementId).is(':checked')) {
+        mirror.show();
         if (userMedia()) {
-            var mirror = $("#" + videoElementId)[0];
-            mirrorVideo(mirror, true, false);
+            mirrorVideo(mirror[0],videoSource, audioSource, true, false);
         } else {
             console.log("No userMedia :'-(");
         }
     } else {
-        $('#' + videoElementId).hide();
+        stopStream(mirror);
+        mirror.hide();
     }
 }
+
+$(document).ready(function(){
+    listOfDevice($('#videoSource')[0], $('#audioSource')[0]);
+});
+
