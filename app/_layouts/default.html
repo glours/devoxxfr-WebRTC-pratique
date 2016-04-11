@@ -157,7 +157,7 @@
                             <li class="form-group">
                                 <label for="checkMirrorVideo">View mirror video</label>
                                 <input type="checkbox" id="checkMirrorVideo" class="form-control"
-                                       onclick="displayMirrorVideo('checkMirrorVideo', 'mirrorVideo', 'videoSource', 'audioSource')">
+                                       onclick="displayMirrorVideo('checkMirrorVideo', 'localContent', 'videoSource', 'audioSource')">
                             </li>
                         </ul>
                         <!-- /.nav-second-level -->
@@ -192,6 +192,12 @@
 <script type="application/javascript" src="js/webrtc-natif.js"></script>
 <script type="application/javascript" src="js/webrtc-page.js"></script>
 
+<script type="application/javascript">
+    $(document).ready(function(){
+        listOfDevice($('#videoSource')[0], $('#audioSource')[0]);
+        $('#mirrorVideo')[0].onvolumechange = function() { console.log("Volume is : " + $('#mirrorVideo')[0].volume);}
+    });
+</script>
 </body>
 
 </html>

@@ -37,3 +37,10 @@ Pour faire fonctionner sous chrome la dernière version de l'api :
 `chrome://flags/#enable-experimental-web-platform-features`
 
 `git checkout step2` pour récupérer le code à la fin de cette étape
+
+### STEP 3 - Afficher les controles et manipuler la video et le son
+Augmenter/baisser le volume, muter le son de la video
+Afficher/masquer la video
+
+`git checkout step3` pour récupérer le code à la fin de cette étape
+    
