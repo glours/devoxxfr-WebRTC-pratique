@@ -27,7 +27,38 @@ function displayMirrorVideo(checkElementId, videoElementId, videoSource, audioSo
     }
 }
 
-$(document).ready(function(){
-    listOfDevice($('#videoSource')[0], $('#audioSource')[0]);
-});
+function muteLocalAudio(muteIcon, videoContent) {
+    var video = $('#' + videoContent)[0];
+    video.muted = !video.muted;
+    changeMuteIcon(muteIcon, video.muted);
+}
 
+function changeMuteIcon(muteIcon, isMuted) {
+    var icon = $('#'+muteIcon);
+    if (isMuted) {
+        icon.addClass('alert-danger');
+    } else {
+        icon.removeClass('alert-danger');
+    }
+}
+
+function volumeUp(videoContent, muteIcon) {
+    var video = $('#' + videoContent)[0];
+    var currentVolume = video.volume;
+    if (currentVolume < 1.0 || video.muted) {
+        if(video.muted) { muteLocalAudio(muteIcon, videoContent);}
+        var newVolume = currentVolume + 0.2;
+        video.volume = newVolume > 1 ? 1 : newVolume;
+    }
+}
+
+function volumeDown(videoContent, muteIcon) {
+    var video = $('#' + videoContent)[0];
+    var currentVolume = video.volume;
+    if (currentVolume > 0.0 && !video.muted) {
+        if(video.muted) { muteLocalAudio(muteIcon, videoContent);}
+        var newVolume = currentVolume - 0.2;
+        if(newVolume <= 0.0 && !video.muted) { muteLocalAudio(muteIcon, videoContent);}
+        video.volume = newVolume < 0 ? 0 : newVolume;
+    }
+}

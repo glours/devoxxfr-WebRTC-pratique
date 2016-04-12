@@ -2,8 +2,8 @@
 layout: default
 title: WebRTC par la pratique - Devoox France 2016
 ---
-<div class="row">
-    <div class="col-lg-12">
+
+    <div class="row col-lg-12">
         <h1 id="webRTCSupport" class="page-header display-none"></h1>
         <div class="select">
             <label for="audioSource">Audio source: </label><select id="audioSource"></select>
@@ -14,8 +14,13 @@ title: WebRTC par la pratique - Devoox France 2016
         </div>
     </div>
     <!-- /.col-lg-12 -->
-    <div class="row">
-        <video id="mirrorVideo" autoplay></video>
+    <div class="row col-lg-12">
+        <div class="row text-center">
+            <a id="muteIcon" href="#" onclick="muteLocalAudio('muteIcon', 'mirrorVideo')"> <span class="glyphicon glyphicon-volume-off fa-lg"></span></a>
+            <a href="#" onclick="volumeDown('mirrorVideo','muteIcon')"><span class="glyphicon glyphicon-volume-down fa-lg"></span></a>
+            <a href="#" onclick="volumeUp('mirrorVideo', 'muteIcon')"><span class="glyphicon glyphicon-volume-up fa-lg"></span></a>
+        </div>
+        <div class="row text-center">
+            <video id="mirrorVideo" autoplay controls></video>
+        </div>
     </div>
-    <!-- /.row -->
-</div>

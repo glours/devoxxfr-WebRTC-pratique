@@ -192,6 +192,12 @@
 <script type="application/javascript" src="js/webrtc-natif.js"></script>
 <script type="application/javascript" src="js/webrtc-page.js"></script>
 
+<script type="application/javascript">
+    $(document).ready(function(){
+        listOfDevice($('#videoSource')[0], $('#audioSource')[0]);
+        $('#mirrorVideo')[0].onvolumechange = function() { console.log("Volume is : " + $('#mirrorVideo')[0].volume);}
+    });
+</script>
 </body>
 
 </html>
