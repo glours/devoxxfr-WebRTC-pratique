@@ -1,5 +1,7 @@
 var audioSelect;
 var videoSelect;
+var localPeerConnection;
+var remotePeerConnection;
 
 function hdConstraints(videoSource, audioSource, useVideo, useAudio) {
     var hdConstraints = {};
@@ -32,7 +34,7 @@ function isUserMediaSupported() {
     return !!navigator.mediaDevices.getUserMedia;
 }
 
-function stopStream(content) {
+function stopLocalSteam(content) {
     content.src = null;
     window.localStream.getTracks().forEach(function (track) { track.stop(); });
 }
@@ -96,3 +98,27 @@ function listOfDevice(video, audio) {
     }
 }
 
+
+function remoteVideo(videoContent) {
+
+}
+
+function localDescription(description){
+
+}
+
+function remoteDescription(description){
+
+}
+
+function localIceCandidate(event){
+
+}
+
+function remoteIceCandidate(event){
+
+}
+
+function stopRemoteStream(remote) {
+
+}

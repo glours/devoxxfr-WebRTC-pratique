@@ -43,4 +43,10 @@ Augmenter/baisser le volume, muter le son de la video
 Afficher/masquer la video
 
 `git checkout step3` pour récupérer le code à la fin de cette étape
-    
+
+### STEP 4 - Communication videos locales
+Utiliser l'api RTCPeerConnection pour connecter 2 streams locales :
+ - Ajouter une seconde video
+ - Simuler la connexion et ouvrir la seconde video (remote)
+
+`git checkout step4` pour récupérer le code à la fin de cette étape
