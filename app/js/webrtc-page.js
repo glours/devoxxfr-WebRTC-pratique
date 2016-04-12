@@ -12,10 +12,11 @@ function displayWebRTCSupport(checkElementId, contentElementId) {
     }
 }
 
-function displayMirrorVideo(checkElementId, videoElementId, videoSource, audioSource) {
-    var mirror = $("#" + videoElementId);
+function displayMirrorVideo(checkElementId, localStreamBlock, videoSource, audioSource) {
+    var block = $("#" + localStreamBlock);
+    var mirror = block.find("video");
     if($('#' + checkElementId).is(':checked')) {
-        mirror.show();
+        block.show();
         if (userMedia()) {
             mirrorVideo(mirror[0],videoSource, audioSource, true, false);
         } else {
@@ -23,7 +24,19 @@ function displayMirrorVideo(checkElementId, videoElementId, videoSource, audioSo
         }
     } else {
         stopStream(mirror);
-        mirror.hide();
+        block.hide();
+    }
+}
+
+
+function hideVideo(hideVideoIcon, videoContent) {
+    var video = $('#' + videoContent)[0];
+    if(video.paused) {
+        video.play();
+        $('#' + hideVideoIcon +" > span").removeClass("glyphicon-play").addClass("glyphicon-pause");
+    } else {
+        video.pause();
+        $('#' + hideVideoIcon +" > span").removeClass("glyphicon-pause").addClass("glyphicon-play");
     }
 }
 

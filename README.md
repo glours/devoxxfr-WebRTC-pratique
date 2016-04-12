@@ -38,4 +38,12 @@ Pour faire fonctionner sous chrome la dernière version de l'api :
 
 ### STEP 3 - Afficher les controles et manipuler la video et le son
 Augmenter/baisser le volume, muter le son de la video
-Afficher/masque la video
+Afficher/masquer la video
+
+`git checkout step-3` pour récupérer le code à la fin de cette étape
+
+### STEP 4 - Communication videos locales
+Utiliser l'api RTCPeerConnection pour connecter 2 streams locales :
+ - Ajouter une seconde video
+ - Simuler la connexion et ouvrir la seconde video (remote)
+
