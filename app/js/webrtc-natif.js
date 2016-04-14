@@ -2,6 +2,8 @@ var audioSelect;
 var videoSelect;
 var localPeerConnection;
 var remotePeerConnection;
+var localDataChannel;
+var remoteDataChannel;
 
 function hdConstraints(videoSource, audioSource, useVideo, useAudio) {
     var hdConstraints = {};
@@ -101,24 +103,72 @@ function listOfDevice(video, audio) {
 
 function remoteVideo(videoContent) {
 
+    var servers = null;
+    var RTCPeerConnection = window.RTCPeerConnection || window.mozRTCPeerConnection ||
+        window.webkitRTCPeerConnection;
+
+    localPeerConnection = new RTCPeerConnection(servers);
+    localPeerConnection.onicecandidate = localIceCandidate;
+
+    remotePeerConnection = new RTCPeerConnection(servers);
+    remotePeerConnection.onicecandidate = remoteIceCandidate;
+    remotePeerConnection.onaddstream = function(event) {
+        window.remoteStream = event.stream;
+        videoContent.src = URL.createObjectURL(window.remoteStream);
+    };
+
+    localPeerConnection.addStream(localStream);
+    localPeerConnection.createOffer(localDescription,errorCallback);
 }
 
 function localDescription(description){
-
+    localPeerConnection.setLocalDescription(description);
+    remotePeerConnection.setRemoteDescription(description);
+    remotePeerConnection.createAnswer(remoteDescription,errorCallback);
 }
 
 function remoteDescription(description){
-
+    remotePeerConnection.setLocalDescription(description);
+    localPeerConnection.setRemoteDescription(description);
 }
 
 function localIceCandidate(event){
-
+    if (event.candidate) {
+        remotePeerConnection.addIceCandidate(new RTCIceCandidate(event.candidate));
+    }
 }
 
 function remoteIceCandidate(event){
-
+    if (event.candidate) {
+        localPeerConnection.addIceCandidate(new RTCIceCandidate(event.candidate));
+    }
 }
 
 function stopRemoteStream(remote) {
+    remote.src = null;
+    window.remoteStream.getTracks().forEach(function (track) { track.stop(); });
+}
 
+function handleDataChannelStateChange(event) {
+
+}
+
+function handleMessage(event, display) {
+
+}
+
+function sendLocalData(input) {
+
+}
+
+function sendRemoteData(input) {
+
+}
+
+function sendData(input, channel) {
+
+}
+
+function initRemoteDataChannel(event) {
+    
 }

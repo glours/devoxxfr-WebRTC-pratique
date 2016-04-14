@@ -79,13 +79,43 @@ function volumeDown(videoContent, muteIcon) {
 }
 
 function displayRemoteVideo(checkElementId, videoContent) {
+    var block = $("#" + videoContent);
+    var remote = block.find("video");
+    if($('#' + checkElementId).is(':checked')) {
+        $(".remote").show();
+        if (userMedia()) {
 
+        } else {
+            console.log("No userMedia :'-(");
+        }
+    } else {
+        stopRemoteStream(remote);
+        $(".remote").hide();
+    }
 }
 
-function call(btnCall, btnHangup, remoteVideoContent) {
-
+function call(btnCall, btnHangup, remoteVideoContent, chat, btnChat, remoteBtnChat) {
+    $('#' + btnCall)[0].disabled = true;
+    $('#' + btnHangup)[0].disabled = false;
+    $('#' + btnChat)[0].disabled = false;
+    $('#' + remoteBtnChat)[0].disabled = false;
+    remoteVideo($('#' + remoteVideoContent)[0], $('#' + chat) );
 }
 
-function hangUp(btnCall, btnHangup, remoteVideoContent) {
+function hangUp(btnCall, btnHangup, remoteVideoContent, bntChat, remoteBtnChat) {
+    $('#' + btnCall)[0].disabled = false;
+    $('#' + btnHangup)[0].disabled = true;
+    $('#' + bntChat)[0].disabled = true;
+    $('#' + remoteBtnChat)[0].disabled = true;
+    stopRemoteStream(remoteVideoContent[0]);
+}
 
+function sendLocalMessage(input) {
+    sendLocalData("Local : " + $('#' + input).val());
+    $('#'+ input).val("");
+}
+
+function sendRemoteMessage(input) {
+    sendRemoteData("Remote :  " + $('#'+ input).val());
+    $('#'+ input).val("");
 }

@@ -27,8 +27,30 @@ title: WebRTC par la pratique - Devoox France 2016
             <div class="row text-center">
                 <video id="mirrorVideo" autoplay controls muted></video>
             </div>
+            <div class="row col-lg-12 remote">
+                <div>
+                    <div id="conversation">
+                        <div class="panel panel-primary fixed-panel">
+                            <div class="panel-heading">
+                                <h3 class="panel-title">Chat</h3>
+                            </div>
+                            <div class="panel-content text-primary" id="messages">
+
+                            </div>
+                            <div class="panel-footer">
+                                <div class="input-group">
+                                    <input id="msg" type="text" class="form-control" placeholder="Tape ton message ici" autofocus>
+                            <span class="input-group-btn">
+                                <button id="chatBtn" class="btn btn-primary" type="button" onclick="sendLocalMessage('msg');" disabled>envoyer</button>
+                            </span>
+                                </div><!-- /input-group -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div id="remoteContent" class="row col-lg-6 display-none">
+        <div id="remoteContent" class="row col-lg-6 remote">
             <div class="row text-center">
                 <a id="muteIconRemote" href="#" onclick="muteLocalAudio('muteIconRemote', 'remoteVideo')"> <span class="glyphicon glyphicon-volume-off fa-lg"></span></a>
                 <a href="#" onclick="volumeDown('remoteVideo','muteIcon')"><span class="glyphicon glyphicon-volume-down fa-lg"></span></a>
@@ -41,8 +63,16 @@ title: WebRTC par la pratique - Devoox France 2016
                 <video id="remoteVideo" autoplay controls></video>
             </div>
             <div class="row text-center">
-                <button id="callBtn" class="btn btn-primary" onclick="call('callBtn', 'hangupBtn', 'remoteVideo');">Appeler</button>
-                <button id="hangupBtn" class="btn btn-success" onclick="hangUp('callBtn', 'hangupBtn', 'remoteVideo');" disabled>Raccrocher</button>
+                <button id="callBtn" class="btn btn-primary" onclick="call('callBtn', 'hangupBtn', 'remoteVideo', 'messages', 'chatBtn', 'remoteChatBtn');">Appeler</button>
+                <button id="hangupBtn" class="btn btn-success" onclick="hangUp('callBtn', 'hangupBtn', 'remoteVideo', 'chatBtn', 'remoteChatBtn');" disabled>Raccrocher</button>
+            </div>
+            <div class="panel-footer">
+                <div class="input-group">
+                    <input id="remoteMsg" type="text" class="form-control" placeholder="Tape ton message ici" autofocus>
+                            <span class="input-group-btn">
+                                <button id="remoteChatBtn" class="btn btn-primary" type="button" onclick="sendRemoteMessage('remoteMsg');" disabled>envoyer</button>
+                            </span>
+                </div><!-- /input-group -->
             </div>
         </div>
     </div>
