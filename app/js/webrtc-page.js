@@ -12,19 +12,21 @@ function displayWebRTCSupport(checkElementId, contentElementId) {
     }
 }
 
-function displayMirrorVideo(checkElementId, localStreamBlock, videoSource, audioSource) {
+function displayMirrorVideo(checkElementId, localStreamBlock, videoSource, audioSource, remoteMenu) {
     var block = $("#" + localStreamBlock);
     var mirror = block.find("video");
     if($('#' + checkElementId).is(':checked')) {
         block.show();
+        $('#' + remoteMenu).show();
         if (userMedia()) {
             mirrorVideo(mirror[0],videoSource, audioSource, true, false);
         } else {
             console.log("No userMedia :'-(");
         }
     } else {
-        stopStream(mirror);
+        stopLocalSteam(mirror);
         block.hide();
+        $('#' + remoteMenu).hide();
     }
 }
 
@@ -74,4 +76,32 @@ function volumeDown(videoContent, muteIcon) {
         if(newVolume <= 0.0 && !video.muted) { muteLocalAudio(muteIcon, videoContent);}
         video.volume = newVolume < 0 ? 0 : newVolume;
     }
+}
+
+function displayRemoteVideo(checkElementId, videoContent) {
+    var block = $("#" + videoContent);
+    var remote = block.find("video");
+    if($('#' + checkElementId).is(':checked')) {
+        block.show();
+        if (userMedia()) {
+
+        } else {
+            console.log("No userMedia :'-(");
+        }
+    } else {
+        stopRemoteStream(remote);
+        block.hide();
+    }
+}
+
+function call(btnCall, btnHangup, remoteVideoContent) {
+    $('#' + btnCall)[0].disabled = true;
+    $('#' + btnHangup)[0].disabled = false;
+    remoteVideo($('#' + remoteVideoContent)[0]);
+}
+
+function hangUp(btnCall, btnHangup, remoteVideoContent) {
+    $('#' + btnCall)[0].disabled = false;
+    $('#' + btnHangup)[0].disabled = true;
+    stopRemoteStream(remoteVideoContent[0]);
 }

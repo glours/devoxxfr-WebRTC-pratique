@@ -47,3 +47,9 @@ Utiliser l'api RTCPeerConnection pour connecter 2 streams locales :
  - Ajouter une seconde video
  - Simuler la connexion et ouvrir la seconde video (remote)
 
+`git checkout step-4` pour récupérer le code à la fin de cette étape
+
+### STEP 5 - Échanger des données
+Utiliser les apis RTCDataChannel et RTCPeerConnection pour échanger des messages entre la partie locale et remote.
+ - Ajouter de quoi saisir et afficher les messages
+ - Brancher ses éléments pour intéragir avec l'api RTCDataChannel

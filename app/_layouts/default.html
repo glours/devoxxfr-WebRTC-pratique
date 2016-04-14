@@ -157,7 +157,12 @@
                             <li class="form-group">
                                 <label for="checkMirrorVideo">View mirror video</label>
                                 <input type="checkbox" id="checkMirrorVideo" class="form-control"
-                                       onclick="displayMirrorVideo('checkMirrorVideo', 'localContent', 'videoSource', 'audioSource')">
+                                       onclick="displayMirrorVideo('checkMirrorVideo', 'localContent', 'videoSource', 'audioSource', 'remoteMenu')">
+                            </li>
+                            <li id="remoteMenu" class="form-group" style="display: none">
+                                <label for="checkRemoteVideo">View remote video</label>
+                                <input type="checkbox" id="checkRemoteVideo" class="form-control"
+                                       onclick="displayRemoteVideo('checkRemoteVideo', 'remoteContent')">
                             </li>
                         </ul>
                         <!-- /.nav-second-level -->

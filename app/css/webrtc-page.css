@@ -3,6 +3,7 @@
 label { padding-right: 10px }
 
 video {
-    width: 1280px;
-    height: 720px;
+    width: 640px;
+    height: 480px;
+    border: groove;
 }
