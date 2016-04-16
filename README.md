@@ -57,3 +57,12 @@ Utiliser les apis RTCDataChannel et RTCPeerConnection pour échanger des message
  - Brancher ses éléments pour intéragir avec l'api RTCDataChannel
 
 `git checkout step5` pour récupérer le code à la fin de cette étape
+
+### STEP 6 - Du remote, du vrai !
+Maintenant que vous avez toutes les bases nous allons utiliser la bibliothèque simpleWebRTC.
+La librairie est dans votre répertoire js et ça documentation est disponible ici :
+https://github.com/andyet/SimpleWebRTC
+
+ - Adaptez votre code pour utiliser la librairie.
+ - Supprimez tout ce qui n'est plus essentiel (champ de saisie pour le chat sur la partie remote par exemeple)
+ - Ouvrez 2 navigateurs (supportant WebRTC of course) et testez ^^

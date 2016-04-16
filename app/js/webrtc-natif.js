@@ -38,6 +38,7 @@ function isUserMediaSupported() {
 
 function stopLocalSteam(content) {
     content.src = null;
+    localDataChannel.close();
     window.localStream.getTracks().forEach(function (track) { track.stop(); });
 }
 
@@ -101,20 +102,36 @@ function listOfDevice(video, audio) {
 }
 
 
-function remoteVideo(videoContent) {
+function remoteVideo(videoContent, display) {
 
     var servers = null;
     var RTCPeerConnection = window.RTCPeerConnection || window.mozRTCPeerConnection ||
         window.webkitRTCPeerConnection;
 
+
     localPeerConnection = new RTCPeerConnection(servers);
     localPeerConnection.onicecandidate = localIceCandidate;
+
+    localDataChannel = localPeerConnection.createDataChannel('My_Channel_Name', {reliable : false});
+
+    localDataChannel.onopen = handleDataChannelStateChange;
+    localDataChannel.onerror = handleDataChannelStateChange;
+    localDataChannel.onmessage = function(event) { handleMessage(event, display);};
+
+
 
     remotePeerConnection = new RTCPeerConnection(servers);
     remotePeerConnection.onicecandidate = remoteIceCandidate;
     remotePeerConnection.onaddstream = function(event) {
         window.remoteStream = event.stream;
         videoContent.src = URL.createObjectURL(window.remoteStream);
+    };
+    remotePeerConnection.ondatachannel = function(event) {
+        remoteDataChannel = event.channel;
+        remoteDataChannel.onopen = handleDataChannelStateChange;
+        remoteDataChannel.onclose = handleDataChannelStateChange;
+        // Specific case of our example, usually you don't have to manage remote display.
+        remoteDataChannel.onmessage = function(event) { handleMessage(event, $('#messages') );};
     };
 
     localPeerConnection.addStream(localStream);
@@ -146,29 +163,35 @@ function remoteIceCandidate(event){
 
 function stopRemoteStream(remote) {
     remote.src = null;
+    remoteDataChannel.close();
     window.remoteStream.getTracks().forEach(function (track) { track.stop(); });
 }
 
 function handleDataChannelStateChange(event) {
-
+    var state = this.readyState;
+    console.log(state);
 }
 
 function handleMessage(event, display) {
-
+    display.append('<p>' + event.data + '</p>');
 }
 
 function sendLocalData(input) {
-
+    sendData(input, localDataChannel);
 }
 
 function sendRemoteData(input) {
-
+    sendData(input, remoteDataChannel);
 }
 
 function sendData(input, channel) {
-
+    channel.send(input);
 }
 
 function initRemoteDataChannel(event) {
-    
+    remoteDataChannel = event.channel;
+    remoteDataChannel.onopen = handleDataChannelStateChange;
+    remoteDataChannel.onclose = handleDataChannelStateChange;
+    // Specific case of our example, usually you don't have to manage remote display.
+    remoteDataChannel.onmessage = function(event) { handleMessage(event, $('#chat') );};
 }
