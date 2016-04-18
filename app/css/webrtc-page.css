@@ -3,18 +3,18 @@
 label { padding-right: 10px }
 
 video {
-    width : 200px;
-    height: 200px;
+    width: 640px;
+    height: 480px;
+    border: groove;
 }
 
 .remote {
     display : none;
 }
 
-.remote video {
-    width: 640px;
-    height: 480px;
-    border: groove;
+.local video {
+    width : 200px;
+    height: 200px;
 }
 
 .fixed-panel {
@@ -42,4 +42,12 @@ video {
     background-color: #ebeced;
     border-color: #ebeced;
     border-top: 1px solid #ddd;
+}
+
+.connectionstate {
+    position: absolute;
+    top: 0px;
+    width: 100%;
+    text-align: center;
+    color: #fff
 }

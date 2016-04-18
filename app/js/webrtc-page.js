@@ -31,26 +31,31 @@ function displayMirrorVideo(checkElementId, localStreamBlock, videoSource, audio
 }
 
 
-function hideVideo(hideVideoIcon, videoContent) {
-    var video = $('#' + videoContent)[0];
-    if(video.paused) {
-        video.play();
-        $('#' + hideVideoIcon +" > span").removeClass("glyphicon-play").addClass("glyphicon-pause");
+function hideVideo(hideVideoIcon) {
+    var icon  = $('#' + hideVideoIcon +" > span");
+    if(icon.hasClass('glyphicon-play')) {
+        simpleweb().resume();
+        icon.removeClass("glyphicon-play").addClass("glyphicon-pause");
     } else {
-        video.pause();
-        $('#' + hideVideoIcon +" > span").removeClass("glyphicon-pause").addClass("glyphicon-play");
+        simpleweb().pause();
+        icon.removeClass("glyphicon-pause").addClass("glyphicon-play");
     }
 }
 
 function muteLocalAudio(muteIcon, videoContent) {
     var video = $('#' + videoContent)[0];
     video.muted = !video.muted;
+    if(video.muted) {
+        simpleweb().mute();
+    } else {
+        simpleweb().unmute();
+    }
     changeMuteIcon(muteIcon, video.muted);
 }
 
-function changeMuteIcon(muteIcon, isMuted) {
-    var icon = $('#'+muteIcon);
-    if (isMuted) {
+function changeMuteIcon(muteIcon, ismuted) {
+    var icon = $('#'+muteIcon +' > span');
+    if (ismuted) {
         icon.addClass('alert-danger');
     } else {
         icon.removeClass('alert-danger');
@@ -64,6 +69,7 @@ function volumeUp(videoContent, muteIcon) {
         if(video.muted) { muteLocalAudio(muteIcon, videoContent);}
         var newVolume = currentVolume + 0.2;
         video.volume = newVolume > 1 ? 1 : newVolume;
+        simpleweb().setVolumeForAll(video.volume);
     }
 }
 
@@ -75,6 +81,7 @@ function volumeDown(videoContent, muteIcon) {
         var newVolume = currentVolume - 0.2;
         if(newVolume <= 0.0 && !video.muted) { muteLocalAudio(muteIcon, videoContent);}
         video.volume = newVolume < 0 ? 0 : newVolume;
+        simpleweb().setVolumeForAll(video.volume);
     }
 }
 
@@ -94,28 +101,31 @@ function displayRemoteVideo(checkElementId, videoContent) {
     }
 }
 
-function call(btnCall, btnHangup, remoteVideoContent, chat, btnChat, remoteBtnChat) {
-    $('#' + btnCall)[0].disabled = true;
-    $('#' + btnHangup)[0].disabled = false;
-    $('#' + btnChat)[0].disabled = false;
-    $('#' + remoteBtnChat)[0].disabled = false;
-    remoteVideo($('#' + remoteVideoContent)[0], $('#' + chat) );
+function call(btnCall, btnHangup, btnChat) {
+    $('#' + btnCall).prop("disabled",true);
+    $('#' + btnHangup).prop("disabled",false);
+    $('#' + btnChat).prop("disabled",false);
+    initializeVideoChat({
+        localVideo : 'mirrorVideo',
+        remoteVideos : 'remoteVideos',
+        roomName :'MyRoom',
+        msgBox :'msg',
+        chatSection : 'messages'/*,
+         opts : {
+         signalServerUrl : 'stun.l.google.com:19302'
+         },*/
+    });
 }
 
-function hangUp(btnCall, btnHangup, remoteVideoContent, bntChat, remoteBtnChat) {
-    $('#' + btnCall)[0].disabled = false;
-    $('#' + btnHangup)[0].disabled = true;
-    $('#' + bntChat)[0].disabled = true;
-    $('#' + remoteBtnChat)[0].disabled = true;
-    stopRemoteStream(remoteVideoContent[0]);
+function hangUp(btnCall, btnHangup, btnChat) {
+    $('#' + btnCall).prop("disabled",false);
+    $('#' + btnHangup).prop("disabled",true);
+    $('#' + btnChat).prop("disabled",true);
+    hangupSession();
 }
 
 function sendLocalMessage(input) {
-    sendLocalData("Local : " + $('#' + input).val());
+    sendMessage($('#' + input).val());
     $('#'+ input).val("");
 }
 
-function sendRemoteMessage(input) {
-    sendRemoteData("Remote :  " + $('#'+ input).val());
-    $('#'+ input).val("");
-}

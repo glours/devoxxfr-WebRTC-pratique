@@ -64,3 +64,12 @@ https://github.com/andyet/SimpleWebRTC
  - Adaptez votre code pour utiliser la librairie.
  - Supprimez tout ce qui n'est plus essentiel (champ de saisie pour le chat sur la partie remote par exemeple)
  - Ouvrez 2 navigateurs (supportant WebRTC of course) et testez ^^
+
+ `git checkout step-6` pour récupérer le code à la fin de cette étape
+
+### FINAL STEP - Partage d'écran
+Il ne nous reste plus qu'à partager notre écran et le tour sera joué, nous aurons une chat room audio/video/text complète \o/
+
+- Utilisez la documentation de simpleWebRTC pour partager votre écran
+- Clonez le repository suivant : https://github.com/otalk/getScreenMedia  et suivre les instructions de configuration
+
