@@ -150,6 +150,20 @@
                     <li>
                         <a href="#"><i class="fa fa-wrench fa-fw"></i> UI Elements<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level form-inline">
+                            <li class="form-group">
+                                <label for="checkWebRTCSupport" class="control-label">Browser Compatibility &nbsp;</label>
+                                <input type="checkbox" id="checkWebRTCSupport" class="form-control" onclick="displayWebRTCSupport('checkWebRTCSupport', 'webRTCSupport')">
+                            </li>
+                            <li class="form-group">
+                                <label for="checkMirrorVideo">View mirror video</label>
+                                <input type="checkbox" id="checkMirrorVideo" class="form-control"
+                                       onclick="displayMirrorVideo('checkMirrorVideo', 'localContent', 'videoSource', 'audioSource', 'remoteMenu')">
+                            </li>
+                            <li id="remoteMenu" class="form-group" style="display: none">
+                                <label for="checkRemoteVideo">View remote video</label>
+                                <input type="checkbox" id="checkRemoteVideo" class="form-control"
+                                       onclick="displayRemoteVideo('checkRemoteVideo', 'remoteContent')">
+                            </li>
                         </ul>
                         <!-- /.nav-second-level -->
                     </li>
@@ -180,9 +194,16 @@
 <!-- Custom Theme JavaScript -->
 <script src="js/sb-admin-2.js"></script>
 <!-- Add your webRTC javascript -->
-<script type="application/javascript" src="js/webrtc-natif.js"></script>
+<script type="application/javascript" src="js/simplewebrtc.min.js"></script>
+<script type="application/javascript" src="js/webrtc-simple.js"></script>
 <script type="application/javascript" src="js/webrtc-page.js"></script>
 
+<script type="application/javascript">
+    $(document).ready(function(){
+        listOfDevice($('#videoSource')[0], $('#audioSource')[0]);
+        $('#mirrorVideo')[0].onvolumechange = function() { console.log("Volume is : " + $('#mirrorVideo')[0].volume);}
+    });
+</script>
 </body>
 
 </html>

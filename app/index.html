@@ -2,9 +2,68 @@
 layout: default
 title: WebRTC par la pratique - Devoox France 2016
 ---
-<div class="row">
-    <div class="col-lg-12">
-        Plein de chose à mettre ici
+
+    <div class="row col-lg-12">
+        <h1 id="webRTCSupport" class="page-header display-none"></h1>
+        <div class="select">
+            <label for="audioSource">Audio source: </label><select id="audioSource"></select>
+        </div>
+
+        <div class="select">
+            <label for="videoSource">Video source: </label><select id="videoSource"></select>
+        </div>
     </div>
     <!-- /.col-lg-12 -->
-</div>
+    <div class="row col-lg-12">
+        <div id="localContent" class="row col-lg-6">
+            <div class="row text-center">
+                <a id="hideVideoIcon" href="#" onclick="hideVideo('hideVideoIcon', 'remoteVideo')"><span class="glyphicon glyphicon-pause fa-lg"></span></a>
+            </div>
+            <div id="remoteVideos" class="row text-center">
+            </div>
+            <hr>
+            <div class="row text-center">
+                <a id="muteIcon" href="#" onclick="muteLocalAudio('muteIcon', 'mirrorVideo')"> <span class="glyphicon glyphicon-volume-off fa-lg"></span></a>
+                <a href="#" onclick="volumeDown('mirrorVideo','muteIcon')"><span class="glyphicon glyphicon-volume-down fa-lg"></span></a>
+                <a href="#" onclick="volumeUp('mirrorVideo', 'muteIcon')"><span class="glyphicon glyphicon-volume-up fa-lg"></span></a>
+            </div>
+            <div class="row text-center local">
+                <video id="mirrorVideo" autoplay></video>
+            </div>
+            <div class="row text-center">
+                <a id="hideVideoIconLocal" href="#" onclick="hideVideo('hideVideoIconLocal', 'mirrorVideo')"><span class="glyphicon glyphicon-pause fa-lg"></span></a>
+            </div>
+            <div class="row text-center">
+                <button id="callBtn" class="btn btn-primary" onclick="call('callBtn', 'hangupBtn', 'chatBtn');">Appeler</button>
+                <button id="hangupBtn" class="btn btn-success" onclick="hangUp('callBtn', 'hangupBtn', 'chatBtn');" disabled>Raccrocher</button>
+            </div>
+        </div>
+        <div id="remoteContent" class="row col-lg-6">
+            <div class="row col-lg-offset-1 col-lg-10">
+                <div>
+                    <div id="conversation">
+                        <div class="panel panel-primary fixed-panel">
+                            <div class="panel-heading">
+                                <h3 class="panel-title">Chat</h3>
+                            </div>
+                            <div class="panel-content text-primary" id="messages">
+
+                            </div>
+                            <div class="panel-footer">
+                                <div class="input-group">
+                                    <input id="msg" type="text" class="form-control" placeholder="Tape ton message ici" autofocus>
+                            <span class="input-group-btn">
+                                <button id="chatBtn" class="btn btn-primary" type="button" onclick="sendLocalMessage('msg');" disabled>envoyer</button>
+                            </span>
+                                </div><!-- /input-group -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row col-lg-offset-1 col-lg-10 text-center ">
+                <button id="screenShareButton">Share</button>
+            </div>
+            <div id="localScreenContainer" class="row"></div>
+        </div>
+    </div>
