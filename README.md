@@ -16,6 +16,8 @@ Nous commencerons par utiliser les apis natives de vos navigateurs pour comprend
 A la fin de cette session vous serez en mesure d'intégrer rapidement audio et vidéo à votre application HTML 5 existante.
 
 
+### POUR COMMENCER
+`git checkout step-init`
 
 ### STEP 0 - Vérifier la compatibilité de votre navigateur
 Importer le projet maven dans votre éditeur de code préféré.
