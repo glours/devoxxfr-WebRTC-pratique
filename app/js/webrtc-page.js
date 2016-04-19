@@ -110,11 +110,44 @@ function call(btnCall, btnHangup, btnChat) {
         remoteVideos : 'remoteVideos',
         roomName :'MyRoom',
         msgBox :'msg',
-        chatSection : 'messages'/*,
+        chatSection : 'messages',
+        localScreenContainer : 'localScreenContainer'
+        /*,
          opts : {
          signalServerUrl : 'stun.l.google.com:19302'
          },*/
     });
+
+    var button = $('#screenShareButton'),
+        setButton = function (bool) {
+            button.innerText = bool ? 'share screen' : 'stop sharing';
+        };
+    if (!simpleweb().capabilities.screenSharing) {
+        button.disabled = 'disabled';
+    }
+    simpleweb().on('localScreenRemoved', function () {
+        setButton(true);
+    });
+
+    setButton(true);
+
+    button.click(function () {
+        if (simpleweb().getLocalScreen()) {
+            simpleweb().stopScreenShare();
+            setButton(true);
+        } else {
+            simpleweb().shareScreen(function (err) {
+                if (err) {
+                    console.error(err);
+                    setButton(true);
+                } else {
+                    setButton(false);
+                }
+            });
+
+        }
+    });
+
 }
 
 function hangUp(btnCall, btnHangup, btnChat) {
@@ -128,4 +161,3 @@ function sendLocalMessage(input) {
     sendMessage($('#' + input).val());
     $('#'+ input).val("");
 }
-

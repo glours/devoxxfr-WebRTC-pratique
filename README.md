@@ -73,3 +73,14 @@ Il ne nous reste plus qu'à partager notre écran et le tour sera joué, nous au
 - Utilisez la documentation de simpleWebRTC pour partager votre écran
 - Clonez le repository suivant : https://github.com/otalk/getScreenMedia  et suivre les instructions de configuration
 
+`git checkout step-6` pour récupérer le code à la fin de cette étape
+
+### Encore un peu ?
+Vous pouvez vous amuser à :
+- Gérer une room multi-users
+- Appliquer des filtres sur les streams videos ou audio
+- Faire des captures d'écrans
+- Enregistrer les flux audios et/ou videos
+- Corriger le code javascript de ce atelier ^^
+
+Merci de votre participation

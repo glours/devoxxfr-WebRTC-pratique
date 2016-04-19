@@ -13,12 +13,30 @@ function initializeVideoChat(config) {
 
     simpleWebRTC.on('readyToCall', function () {
         simpleWebRTC.joinRoom(config.roomName);
-        $('#' + config.shadowDiv).addClass('hidden');
     });
 
     simpleWebRTC.on("localMediaError", function(data) {
         console.log("data");
     });
+
+    // local screen obtained
+    simpleWebRTC.on('localScreenAdded', function (video) {
+        video.onclick = function () {
+            video.style.width = video.videoWidth + 'px';
+            video.style.height = video.videoHeight + 'px';
+        };
+        var localScreenContainer = $('# '  + config.localScreenContainer);
+        localScreenContainer.appendChild(video);
+        localScreenContainer.show();
+    });
+    // local screen remowebrtcved
+    simpleWebRTC.on('localScreenRemoved', function (video) {
+        var localScreenContainer = $('# '  + config.localScreenContainer);
+        localScreenContainer.removeChild(video);
+        localScreenContainer.hide();
+    });
+
+
     return simpleWebRTC;
 }
 
@@ -41,9 +59,9 @@ function initWebRtc(localVideo, remoteVideos, config) {
                 OfferToReceiveVideo: true
             }
         },
-        enableDataChannels: true
-        //url: config.signalServerUrl,
-        //nick : config.nick
+        enableDataChannels: true/*,
+        url: config.signalServerUrl
+        nick : config.nick*/
     });
 }
 
@@ -173,4 +191,3 @@ function listOfDevice(video, audio) {
         navigator.mediaDevices.enumerateDevices().then(sources);
     }
 }
-
