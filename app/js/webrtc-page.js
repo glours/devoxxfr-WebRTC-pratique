@@ -1,12 +1,17 @@
 function displayWebRTCSupport(checkElementId, contentElementId) {
+    var contentElement = $("#" + contentElementId);
     if($('#' + checkElementId).is(':checked')) {
         var isSupported = 'Your browser support getUserMedia !';
         if (!isUserMediaSupported()) {
             isSupported = 'getUserMedia() is not supported in your browser';
         }
-        $("#" + contentElementId).html(isSupported);
-        $('#' + contentElementId).show();
+        contentElement.html(isSupported);
+        contentElement.show();
     } else {
-        $('#' + contentElementId).hide();
+        contentElement.hide();
     }
+}
+
+function displayMirrorVideo(checkElementId, videoElementId) {
+    // Code here
 }
